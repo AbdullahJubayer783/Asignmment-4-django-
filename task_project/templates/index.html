@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>This is Show Task</h2>
+<div class="d-flex flex-wrap justify-content-center mt-2 mx-4">
+    {% for dt in data %}
+      <div class="col-sm-4 align-center text-center ">
+          <div class="card mx-2">
+            <div class="card-body">
+              <h5 class="card-title">Task Id: {{dt.id}}</h5>
+              <p class="card-text">Task Assign Date: {{dt.Assign_Date}}</p>
+              <p class="card-text">Task Description: {{dt.taskDescription}}</p>
+             
+               <div calss="">
+                <small ><strong>Catagories : 
+                  {% for i in dt.category.all %}
+                      <button class="btn btn-primary btn-sm" disabled>{{i.name}}</button>
+                  {% endfor %}
+    
+                </strong></small>
+              </div>
+               <br />
+               {% if dt.is_completed %}
+               <button type="button" class="btn btn-success" disabled>Complete</button>
+               {% else %}
+               <a href="{% url "edit_post" dt.id %}" class="btn btn-warning">Edit</a>
+               <a href="{% url "delete_post" dt.id%}" class="btn btn-danger">Delete</a> 
+               {% endif %}
+   
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      
+{% endblock %}
